@@ -1,7 +1,7 @@
 //DOM Elements
 const numberButton = document.querySelectorAll(".number");
 const operatorButton = document.querySelectorAll(".operator");
-const clearButton = document.querySelectorAll(".clear");
+const clearButton = document.querySelector(".clear");
 const displayView = document.querySelector(".display");
 const resultButton = document.querySelector(".result");
 
@@ -43,14 +43,14 @@ function operate(num1, num2, operator) {
     }
 }
 
-let firstNumber = "";
-let storedNumber = "";
-let chosenOperator = "";
-let result = "";
-displayView.textContent = 0;
+let firstNumber = "0";
+let storedNumber = "0";
+let chosenOperator = "0";
+let result = "0";
 
 numberButton.forEach((number) => { 
     number.addEventListener("click", function() {
+        firstNumber = "";
         firstNumber += number.value;
         displayView.textContent = firstNumber;
     })
@@ -68,4 +68,14 @@ operatorButton.forEach((operator) => {
 resultButton.addEventListener("click", function() {
     result = operate(parseInt(storedNumber), parseInt(firstNumber), chosenOperator);
     displayView.textContent = result;
+    firstNumber = result;
+    storedNumber = "";
+    result = "";
+});
+
+clearButton.addEventListener("click", function() {
+    displayView.textContent = 0;
+    firstNumber = "";
+    storedNumber = "";
+    result = "";
 });
