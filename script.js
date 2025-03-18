@@ -31,6 +31,14 @@ let first = 0;
 let second = 0;
 
 function operate(num1, num2, operator) {
+    if (!num1) {
+        num1 = 0;
+    }
+
+    if (!num2) {
+        num2 = 0;
+    }
+
     switch(operator) {
         case "+":
             return add(num1, num2);
@@ -40,36 +48,41 @@ function operate(num1, num2, operator) {
             return multiply(num1, num2);
         case "/":
             return divide(num1, num2);
+        default:
+            return 0;
     }
 }
 
-let firstNumber = "0";
-let storedNumber = "0";
-let chosenOperator = "0";
+let inputNumber = "";
+let storedNumber = "";
+let chosenOperator = "";
 let result = "0";
 
 numberButton.forEach((number) => { 
     number.addEventListener("click", function() {
-        firstNumber = "";
-        firstNumber += number.value;
-        displayView.textContent = firstNumber;
+        inputNumber += number.value;
+        displayView.textContent = inputNumber;
     })
 });
 
 operatorButton.forEach((operator) => {
     operator.addEventListener("click", function() {
+        if (!inputNumber) {
+            inputNumber = "0";
+        }
         chosenOperator = operator.value;
-        displayView.textContent = firstNumber + " " + chosenOperator;
-        storedNumber = firstNumber;
-        firstNumber = "";
+        storedNumber = inputNumber;
+        // rimuovere il feedback dell'operatore scelto dal javascript, passarlo sul css
+        // dovrebbe dare la possibilità di resettare inputNumber per le prossime operazioni
+        displayView.textContent = inputNumber + " " + chosenOperator;
     })
 });
 
 resultButton.addEventListener("click", function() {
-    result = operate(parseInt(storedNumber), parseInt(firstNumber), chosenOperator);
+    result = operate(parseInt(storedNumber), parseInt(inputNumber), chosenOperator);
     displayView.textContent = result;
-    firstNumber = result;
-    storedNumber = "";
+    inputNumber = "";
+    storedNumber = result;
     result = "";
 });
 

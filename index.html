@@ -7,27 +7,50 @@
     </head>
 
     <body>
-        <div id="container"></div>
+        <div id="container">
             <div id="display" class="display">0</div>
 
-            <button value="1" class="number">1</button>
-            <button value="2" class="number">2</button>
-            <button value="3" class="number">3</button>
-            <button value="4" class="number">4</button>
-            <button value="5" class="number">5</button>
-            <button value="6" class="number">6</button>
-            <button value="7" class="number">7</button>
-            <button value="8" class="number">8</button>
-            <button value="9" class="number">9</button>
-            <button value="0" class="number">0</button>
+            <div class="buttons-container">
+                
+                <div class="number-buttons">
+                    <div class="first-row">
+                        <button value="1" class="number">1</button>
+                        <button value="2" class="number">2</button>
+                        <button value="3" class="number">3</button>
+                    </div>
 
-            <button value="+" class="operator">+</button>
-            <button value="-" class="operator">-</button>
-            <button value="*" class="operator">*</button>
-            <button value="/" class="operator">/</button>
+                    <div class="second-row">
+                        <button value="4" class="number">4</button>
+                        <button value="5" class="number">5</button>
+                        <button value="6" class="number">6</button>
+                    </div>
 
-            <button id="result" class="result">=</button>
-            <button id="clear" class="clear">C</button>
+                    <div class="third-row">
+                        <button value="7" class="number">7</button>
+                        <button value="8" class="number">8</button>
+                        <button value="9" class="number">9</button>
+                    </div>
+
+                    <div class="fourth row">
+                        <button value="," class="number">,</button>
+                        <button value="0" class="number">0</button>
+                        <button value="00" class="number">00</button>
+                    </div>
+                </div>
+
+                <div class="operator-buttons">
+                    <div class="operators">
+                        <button id="clear" class="operator">C</button>
+                        <button id="tbd" class="operator">TBD</button>
+                        <button value="+" class="operator">+</button>
+                        <button value="-" class="operator">-</button>
+                        <button value="*" class="operator">*</button>
+                        <button value="/" class="operator">/</button>
+                        <button id="result" class="result">=</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src = "script.js"></script>
     </body>
 </html>
