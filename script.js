@@ -79,8 +79,10 @@ operatorButton.forEach((operator) => {
             inputNumber = "0";
         }
         
-        if (flag === true) {
+        if (flag === true && !inputNumber) {
             result = operate(parseInt(storedNumber), parseInt(inputNumber), chosenOperator);
+            result = Math.round(result * 10000000000) / 10000000000;
+            chosenOperator = "";
             displayView.textContent = result;
             flag = false;
         }
@@ -103,7 +105,6 @@ resultButton.addEventListener("click", function() {
     result = operate(parseInt(storedNumber), parseInt(inputNumber), chosenOperator);
     result = Math.round(result * 10000000000) / 10000000000;
     displayView.textContent = result;
-    inputNumber = "";
     storedNumber = result;
     result = "";
     flag = false;
@@ -112,6 +113,7 @@ resultButton.addEventListener("click", function() {
 
 clearButton.addEventListener("click", function() {
     displayView.textContent = 0;
+    chosenOperator = "";
     firstNumber = "";
     storedNumber = "";
     result = "";
