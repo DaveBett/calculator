@@ -94,6 +94,7 @@ resultButton.addEventListener("click", function() {
     inputNumber = "";
     storedNumber = result;
     result = "";
+    flag = false;
 });
 
 clearButton.addEventListener("click", function() {
