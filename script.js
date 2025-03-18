@@ -90,6 +90,7 @@ operatorButton.forEach((operator) => {
 
 resultButton.addEventListener("click", function() {
     result = operate(parseInt(storedNumber), parseInt(inputNumber), chosenOperator);
+    result = Math.round(result * 10000000000) / 10000000000;
     displayView.textContent = result;
     inputNumber = "";
     storedNumber = result;
@@ -102,4 +103,5 @@ clearButton.addEventListener("click", function() {
     firstNumber = "";
     storedNumber = "";
     result = "";
+    flag = false;
 });
