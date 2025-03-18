@@ -31,27 +31,33 @@ let first = 0;
 let second = 0;
 
 function operate(num1, num2, operator) {
-    if (!num1) {
-        num1 = 0;
-    }
 
-    if (!num2) {
-        num2 = 0;
-    }
+     
+        if (!num1) {
+            if (operator == "*" || operator || "/") {
+                num1 = 1;
+            } else num1 = 0;
+        }
 
-    switch(operator) {
-        case "+":
-            return add(num1, num2);
-        case "-":
-            return subtract(num1, num2);
-        case "*":
-            return multiply(num1, num2);
-        case "/":
-            return divide(num1, num2);
-        default:
-            return 0;
+        if (!num2) {
+            if (operator == "*" || operator || "/") {
+                num2 = 1;
+            } else num2 = 0;
+        }
+
+        switch(operator) {
+            case "+":
+                return add(num1, num2);
+            case "-":
+                return subtract(num1, num2);
+            case "*":
+                return multiply(num1, num2);
+            case "/":
+                return divide(num1, num2);
+            default:
+                return 0;
+        }
     }
-}
 
 let inputNumber = "";
 let storedNumber = "";
@@ -82,13 +88,18 @@ operatorButton.forEach((operator) => {
         chosenOperator = operator.value;
         storedNumber = displayView.textContent;
         flag = true;
-
-        // displayView.textContent = storedNumber + " " + chosenOperator;
         inputNumber = "";
     })
 });
 
 resultButton.addEventListener("click", function() {
+    if (chosenOperator == "/" && inputNumber == "0") {
+        displayView.textContent = "ERROR";
+        inputNumber = "";
+        storedNumber = result;
+        result = "";
+        flag = false;
+    } else { 
     result = operate(parseInt(storedNumber), parseInt(inputNumber), chosenOperator);
     result = Math.round(result * 10000000000) / 10000000000;
     displayView.textContent = result;
@@ -96,6 +107,7 @@ resultButton.addEventListener("click", function() {
     storedNumber = result;
     result = "";
     flag = false;
+    }
 });
 
 clearButton.addEventListener("click", function() {
