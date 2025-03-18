@@ -1,7 +1,7 @@
 //DOM Elements
 const numberButton = document.querySelectorAll(".number");
 const operatorButton = document.querySelectorAll(".operator");
-const clearButton = document.querySelector(".clear");
+const clearButton = document.querySelector("#clear");
 const displayView = document.querySelector(".display");
 const resultButton = document.querySelector(".result");
 
@@ -57,6 +57,8 @@ let inputNumber = "";
 let storedNumber = "";
 let chosenOperator = "";
 let result = "0";
+let flag = false;
+
 
 numberButton.forEach((number) => { 
     number.addEventListener("click", function() {
@@ -70,11 +72,19 @@ operatorButton.forEach((operator) => {
         if (!inputNumber) {
             inputNumber = "0";
         }
+        
+        if (flag === true) {
+            result = operate(parseInt(storedNumber), parseInt(inputNumber), chosenOperator);
+            displayView.textContent = result;
+            flag = false;
+        }
+
         chosenOperator = operator.value;
-        storedNumber = inputNumber;
-        // rimuovere il feedback dell'operatore scelto dal javascript, passarlo sul css
-        // dovrebbe dare la possibilità di resettare inputNumber per le prossime operazioni
-        displayView.textContent = inputNumber + " " + chosenOperator;
+        storedNumber = displayView.textContent;
+        flag = true;
+
+        // displayView.textContent = storedNumber + " " + chosenOperator;
+        inputNumber = "";
     })
 });
 
