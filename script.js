@@ -4,6 +4,7 @@ const operatorButton = document.querySelectorAll(".operator");
 const clearButton = document.querySelector("#clear");
 const displayView = document.querySelector(".display");
 const resultButton = document.querySelector(".result");
+const decimalButton = document.querySelector("#decimal");
 
 
 //Sum of a, b...
@@ -64,23 +65,32 @@ let storedNumber = "";
 let chosenOperator = "";
 let result = "0";
 let flag = false;
+let decimalFlag = false;
 
 
 numberButton.forEach((number) => { 
     number.addEventListener("click", function() {
         inputNumber += number.value;
         displayView.textContent = inputNumber;
+
+        if (number.value == "." && decimalFlag == false) {
+            decimalFlag = true;
+            decimalButton.setAttribute("value", "");
+        } 
     })
 });
 
 operatorButton.forEach((operator) => {
     operator.addEventListener("click", function() {
+        decimalFlag = false;
+        decimalButton.setAttribute("value", ".");
+
         if (!inputNumber) {
             inputNumber = "0";
         }
         
         if (flag === true && !inputNumber) {
-            result = operate(parseInt(storedNumber), parseInt(inputNumber), chosenOperator);
+            result = operate(parseFloat(storedNumber), parseFloat(inputNumber), chosenOperator);
             result = Math.round(result * 10000000000) / 10000000000;
             chosenOperator = "";
             displayView.textContent = result;
@@ -101,21 +111,26 @@ resultButton.addEventListener("click", function() {
         storedNumber = result;
         result = "";
         flag = false;
+        decimalFlag = false;
     } else { 
-    result = operate(parseInt(storedNumber), parseInt(inputNumber), chosenOperator);
+    result = operate(parseFloat(storedNumber), parseFloat(inputNumber), chosenOperator);
     result = Math.round(result * 10000000000) / 10000000000;
     displayView.textContent = result;
     storedNumber = result;
     result = "";
     flag = false;
+    decimalFlag = false;
+    decimalButton.setAttribute("value", ".");
     }
 });
 
 clearButton.addEventListener("click", function() {
     displayView.textContent = 0;
+    decimalButton.setAttribute("value", ".");
     chosenOperator = "";
     firstNumber = "";
     storedNumber = "";
     result = "";
     flag = false;
+    decimalFlag = false;
 });
